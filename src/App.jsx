@@ -3,6 +3,7 @@ import { auth } from './firebase';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import Login from './components/Login';
 import ProfileSetup from './components/ProfileSetup';
+import Home from './components/Home';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -33,38 +34,23 @@ function App() {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+   <div>
       {user && (
-        <nav className="bg-white shadow-sm border-b border-gray-200 px-6 py-4 flex justify-between items-center">
-          <strong className="text-xl font-bold text-indigo-600">Greetings Hub</strong>
-          <button 
-            onClick={handleLogout}
-            className="text-sm font-medium text-gray-600 hover:text-gray-900 px-4 py-2 rounded-md hover:bg-gray-100 transition-colors"
-          >
+        <nav style={{ display: 'flex', justifyContent: 'space-between', padding: '15px 20px', background: '#ffffff', borderBottom: '1px solid #eee' }}>
+          <strong style={{ fontSize: '1.2rem', color: '#333' }}>Custom Greetings</strong>
+          <button onClick={handleLogout} style={{ background: 'transparent', border: 'none', color: '#ff4757', cursor: 'pointer', fontWeight: 'bold' }}>
             Log Out
           </button>
         </nav>
       )}
 
-      <main className="flex-1 flex items-center justify-center p-6">
-        {!user ? (
-          <Login onLoginSuccess={(user) => setUser(user)} />
-        ) : !isProfileReady ? (
-          <ProfileSetup user={user} onComplete={() => setIsProfileReady(true)} />
-        ) : (
-          <div className="text-center p-10 bg-white rounded-2xl shadow-sm border border-gray-100 max-w-2xl w-full">
-            <img 
-               src={localStorage.getItem('userPic')} 
-               alt="Profile" 
-               className="w-24 h-24 rounded-full mx-auto object-cover border-4 border-indigo-50 shadow-sm mb-4" 
-            />
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Welcome back, {localStorage.getItem('userName')}!
-            </h2>
-            <p className="text-gray-500"></p>
-          </div>
-        )}
-      </main>
+      {!user ? (
+        <Login onLoginSuccess={(user) => setUser(user)} />
+      ) : !isProfileReady ? (
+        <ProfileSetup user={user} onComplete={() => setIsProfileReady(true)} />
+      ) : (
+        <Home userName={localStorage.getItem('userName')} userProfilePic={localStorage.getItem('userPic')} />
+      )}
     </div>
   );
 }
