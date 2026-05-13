@@ -30,7 +30,8 @@ A production-ready web application that enables users to create, personalize, an
 * **State Management:** React Hooks (`useContext`, `useRef`, `useState`)
 * **Storage:** LocalStorage / Firebase Auth (for persistent user profiles)
 
-
+GitHub Link :- https://github.com/Sahil09722/ClassPlus-assignment
+Video Link :- https://drive.google.com/file/d/1DcW_jMvxC6YejPpcXyTUZj0RvSk27C1K/view?usp=drive_link
 
 ## Project Structure
 
